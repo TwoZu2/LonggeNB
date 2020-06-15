@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../static/layui/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+index页面
+<hr>
+<!--    <shiro:guest>-->
+<!--        欢迎游客访问  <a href="login.html">登录</a>-->
+<!--    </shiro:guest>-->
+<!--<shiro:user>-->
+<!--    用户[<shiro:principal/>]欢迎您!-->
+<!--    当前用户为:<shiro:hasRole name="admin">超级管理员</shiro:hasRole>-->
+<!--    <shiro:hasRole name="cmanger">仓库管理员</shiro:hasRole>-->
+<!--    <shiro:hasRole name="xmanger">销售人员</shiro:hasRole>-->
+<!--    <shiro:hasRole name="kmanger">客服人员</shiro:hasRole>-->
+<!--    <shiro:hasRole name="zmanger">行政人员</shiro:hasRole>-->
+<!--</shiro:user>-->
+<!--<hr>-->
+<!--仓库管理-->
+<!--<ul>-->
+<!--    <shiro:hasPermission name="sys:c:save"><li><a href="#">入库</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:c:delete"><li><a href="#">出库</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:c:update"><li><a href="#">修改</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:c:find"><li><a href="#">查询</a> </li></shiro:hasPermission>-->
+<!--</ul>-->
+<!--订单管理-->
+<!--<ul>-->
+<!--    <shiro:hasPermission name="sys:x:save"><li><a href="#">添加订单</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:x:delete"><li><a href="#">修改订单</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:x:update"><li><a href="#">删除订单</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:x:find"><li><a href="#">查询订单</a> </li></shiro:hasPermission>-->
+<!--</ul>-->
+<!--客户管理-->
+<!--<ul>-->
+<!--    <shiro:hasPermission name="sys:k:save"><li><a href="#">添加客户</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:k:delete"><li><a href="#">修改客户</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:k:update"><li><a href="#">删除客户</a> </li></shiro:hasPermission>-->
+<!--    <shiro:hasPermission name="sys:k:find"><li><a href="#">查询客户</a> </li></shiro:hasPermission>-->
+<!--</ul>-->
+<script>
+    var websocket = null;
+    var host = document.location.host;
+    var username = "aaa"; // 获得当前登录人员的userName
+    // alert(username)
+    //判断当前浏览器是否支持WebSocket
+    if ('WebSocket' in window) {
+        alert("浏览器支持Websocket")
+        websocket = new WebSocket('ws://127.0.0.1:8080/webSocket/'+username);
+    } else {
+        alert('当前浏览器 Not support websocket')
+    }
+
+    //连接发生错误的回调方法
+    websocket.onerror = function() {
+        alert("WebSocket连接发生错误")
+        setMessageInnerHTML("WebSocket连接发生错误");
+    };
+
+    //连接成功建立的回调方法
+    websocket.onopen = function() {
+        // alert("WebSocket连接成功")
+        setMessageInnerHTML("WebSocket连接成功");
+    }
+
+    //接收到消息的回调方法
+    websocket.onmessage = function(event) {
+        // alert("接收到消息的回调方法")
+        alert("这是后台推送的消息："+event.data);
+        // websocket.close();
+        // alert("webSocket已关闭！")
+    }
+
+    //连接关闭的回调方法
+    websocket.onclose = function() {
+        setMessageInnerHTML("WebSocket连接关闭");
+    }
+
+    //监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+    window.onbeforeunload = function() {
+        closeWebSocket();
+    }
+
+    //关闭WebSocket连接
+    function closeWebSocket() {
+        websocket.close();
+    }
+
+    //将消息显示在网页上
+    function setMessageInnerHTML(innerHTML) {
+        document.getElementById('message').innerHTML += innerHTML + '<br/>';
+    }
+</script>
+</body>
+</html>

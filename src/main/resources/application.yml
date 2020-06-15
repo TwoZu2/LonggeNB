@@ -1,0 +1,26 @@
+spring:
+    datasource:
+      druid:
+        url: jdbc:mysql://localhost:3306/xiangmu?serverTimezone=Asia/Shanghai
+        driver-class-name: com.mysql.jdbc.Driver
+        username: root
+        password: 123456
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+mybatis:
+  mapper-locations: classpath:mappers/*.xml
+  type-aliases-package: com.sjiag.Beans
+
+
+logging:
+  level:
+    com.sjiag.Dao: trace
+
+# pagehelper
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+

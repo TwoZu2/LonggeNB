@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjiag.Dao.UserDao">
+    <resultMap id="userMap" type="User">
+        <id column="user_id" property="userId"/>
+        <result column="username" property="userName"/>
+        <result column="password" property="userPwd"/>
+        <result column="password_salt" property="pwdSalt"/>
+    </resultMap>
+
+    <select id="queryUserByUsername" resultMap="userMap">
+        select * from tb_users
+        where username = #{username}
+    </select>
+    <insert id="savaUser">
+        insert into tb_users(username,password,password_salt) values(#{username},#{password},#{PwdSalt});
+    </insert>
+</mapper>

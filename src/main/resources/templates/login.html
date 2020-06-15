@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <base href="/">
+    <meta charset="utf-8">
+    <title>自动化管理系统</title>
+    <meta name="keywords" content="HTML5 Bootstrap 3 Admin Template UI Theme"/>
+    <meta name="description" content="AbsoluteAdmin - A Responsive HTML5 Admin UI Framework">
+    <meta name="author" content="AbsoluteAdmin">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="layui/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="layui/admin-forms.css">
+    <link rel="stylesheet" type="text/css" href="layui/theme.css">
+    <link rel="shortcut icon" href="layui/favicon.ico">
+</head>
+<body class="external-page external-alt sb-l-c sb-r-c">
+<div id="main" class="animated fadeIn">
+    <section id="content_wrapper">
+        <section id="content">
+            <div class="admin-form theme-info mw500">
+                <div class="content-header">
+                    <p class="lead">欢迎使用自动化管理系统</p>
+                </div>
+                <div class="panel mt30 mb25">
+                    <form method="post" action="/user/login" id="contact">
+                        <div class="panel-body bg-light p25 pb15">
+                            <div class="section">
+                                <label for="username" class="field-label text-muted fs18 mb10">工号</label>
+                                <label for="username" class="field prepend-icon">
+                                    <input type="text" name="username" id="username" class="gui-input"
+                                           placeholder="请输入用户名...">
+                                    <label for="username" class="field-icon">
+                                        <i class="fa fa-user"></i>
+                                    </label>
+                                </label>
+                            </div>
+                            <div class="section">
+                                <label for="password" class="field-label text-muted fs18 mb10">密码</label>
+                                <label for="password" class="field prepend-icon">
+                                    <input type="password" name="password" id="password" class="gui-input"
+                                           placeholder="请输入密码...">
+                                    <label for="password" class="field-icon">
+                                        <i class="fa fa-lock"></i>
+                                    </label>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="panel-footer clearfix">
+                            <button type="submit" id="login" class="button btn-primary mr10 pull-right">登陆</button>
+                            <label class="switch ib switch-primary mt10">
+                                <input type="checkbox" name="rememberMe" id="rememberMe">
+                                <label for="rememberMe" data-on="是" data-off="否"></label>
+                                <span>记住我</span>
+                            </label>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </section>
+</div>
+
+<!--<script>-->
+<!--    // $("#login").click(function () {-->
+<!--    //     $.ajax({-->
+<!--    //         url:"../login",-->
+<!--    //         data:JSON.stringify({"username":$("#username").val(),"password":$("#password").val()}),-->
+<!--    //         // dataType: "json",-->
+<!--    //         type:"post",-->
+<!--    //         contentType: "application/json;charset=UTF-8",//指定消息请求类型-->
+<!--    //         success(data){-->
+<!--    //             alert(data.username)-->
+<!--    //         }-->
+<!--    //     })-->
+<!--    // })-->
+<!--</script>-->
+</body>
+</html>

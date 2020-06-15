@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjiag.Dao.Util">
+
+    <select id="find" resultType="map">
+        select * from ${table}
+    </select>
+    <select id="findlike" resultType="map" >
+           <if test="table != null">
+                select * from ${table}
+           </if>
+        <if test="map != null">
+            <where>
+                <foreach collection="map" index="key" item="value">
+                    and ${key} like concat('%',#{value},'%')
+                </foreach>
+
+            </where>
+        </if>
+
+
+    </select>
+
+    <insert id="sava" >
+        <if test="table != null and map != null">
+            insert into ${table}
+            <foreach collection="map"  index="key" open="(" close=")" separator=",">
+                ${key}
+            </foreach>
+            values
+            <foreach collection="map" item="value" open="(" close=")" separator=",">
+                #{value}
+            </foreach>
+        </if>
+    </insert>
+    <delete id="deleteById">
+        <if test="table != null and map != null">
+            delete from ${table}
+            <where>
+            <foreach collection="map" item="value" index="key">
+                ${key} = #{value}
+            </foreach>
+            </where>
+        </if>
+    </delete>
+    <update id="update" >
+        <if test="table != null and map != null and id != null">
+                    update ${table}
+            <set>
+                <foreach collection="map" item="value" index="key" separator=",">
+                    ${key} = #{value}
+                </foreach>
+            </set>
+            <foreach collection="id" item="value" index="key">
+               where ${key} = #{value}
+            </foreach>
+        </if>
+    </update>
+</mapper>
