@@ -13,6 +13,7 @@ mybatis:
   type-aliases-package: com.sjiag.Beans
 
 
+
 logging:
   level:
     com.sjiag.Dao: trace

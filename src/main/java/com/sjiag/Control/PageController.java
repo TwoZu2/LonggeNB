@@ -30,4 +30,8 @@ public class PageController {
     public String index1(){
         return "index1";
     }
+    @RequestMapping("/Person")
+    public String Person(){
+        return "page/Person";
+    }
 }

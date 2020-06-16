@@ -12,7 +12,7 @@
 <body class="layui-layout-body">
 <div class="layui-layout layui-layout-admin">
     <div class="layui-header">
-        <div class="layui-logo">layui 后台布局</div>
+        <div class="layui-logo">智慧校园</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <ul class="layui-nav layui-layout-left">
 <!--            <li class="layui-nav-item"><a href="">控制台</a></li>-->
@@ -99,7 +99,7 @@
 
 
                 <shiro:hasRole name="ptmanger">
-                    <li class="layui-nav-item"><a href="">个人信息</a></li>
+                    <li class="layui-nav-item"><a href="Person" target="voiceList">个人信息</a></li>
                     <li class="layui-nav-item"><a href="">我的考勤</a></li>
                     <li class="layui-nav-item"><a href="">课表查看</a></li>
                     <li class="layui-nav-item"><a href="">班级查看</a></li>
@@ -156,7 +156,10 @@
 
     <div class="layui-body">
         <!-- 内容主体区域 -->
-        <div style="padding: 15px;">内容主体区域</div>
+        <div style="padding: 15px; ">
+
+            <iframe class="layadmin-iframe ifrem_voice"  width="100%" height="600px"  name="voiceList" frameborder="0" scrolling="off" ></iframe>
+        </div>
     </div>
 
     <div class="layui-footer">

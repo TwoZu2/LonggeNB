@@ -3,9 +3,6 @@ package com.sjiag.Shiro;
 import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
-import org.apache.shiro.codec.Base64;
-import org.apache.shiro.realm.jdbc.JdbcRealm;
-import org.apache.shiro.realm.text.IniRealm;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
@@ -17,7 +14,6 @@ import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreato
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -132,8 +128,10 @@ public class ShiroConfig {
 
         filterMap.put("/webSocket/**","anon");
         filterMap.put("/index.html","user");
+
         filterMap.put("/**","authc");
                 filterMap.put("/logout","logout");
+
          factoryBean.setFilterChainDefinitionMap(filterMap);
          factoryBean.setLoginUrl("/");
          //设置未授权访问的路径
