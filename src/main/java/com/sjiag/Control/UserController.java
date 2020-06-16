@@ -7,9 +7,11 @@ import com.sjiag.Service.Impl.UserServiceImpl;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -23,17 +25,15 @@ public class UserController {
     @Resource
     ITest iTest;
     @RequestMapping("login")
-    public String login(String username,String password,boolean rememberMe) throws Exception {
+    public String login(String username, String password, boolean rememberMe) throws Exception {
 
-
+        ModelAndView modelAndView = new ModelAndView();
 
 
 
         try {
             userService.UserLogin(username,password,rememberMe);
             System.out.println("登录成功!");
-
-
 
 
 //            a a = new a();

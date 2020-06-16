@@ -38,16 +38,15 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         //获取用户的用户名
-        String username = (String) principalCollection.iterator().next();
+        User user = (User) principalCollection.iterator().next();
         //根据用户名查询角色列表
-        Set<String> roleNames = roleDao.queryRoleNamesByUsername(username);
+        Set<String> roleNames = roleDao.queryRoleNamesByUsername(user.getUserName());
         //根据用户名查询权限列表
-        Set<String> ps = permissionDao.queryPermissionByUsername(username);
+        Set<String> ps = permissionDao.queryPermissionByUsername(user.getUserName());
         System.out.println("查询角色信息");
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         info.setRoles(roleNames);
         info.addStringPermissions(ps);
-
         return info;
     }
 
@@ -59,7 +58,7 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
-        String username = token.getUsername();
+        String username = (String) token.getPrincipal();
         //根据用户名 从数据库查询安全数据
         User user = userDao.queryUserByUsername(username);
         if(user == null){
@@ -67,13 +66,13 @@ public class MyRealm extends AuthorizingRealm {
         }
         if(user.getPwdSalt()==null){
             SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(
-                    username,
+                    user,
                     user.getUserPwd(),
                     getName());
             return info;
         }
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(
-                username,
+                user,
                 user.getUserPwd(),
                 ByteSource.Util.bytes(user.getPwdSalt()),
                 getName());

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class UserServiceImpl implements IUserService {
@@ -27,5 +28,7 @@ public class UserServiceImpl implements IUserService {
         Subject subject = SecurityUtils.getSubject();
         subject.login(token);
     }
-
+    public List finduser(Map map){
+       return util.findlike("tb_users",map);
+    }
 }
