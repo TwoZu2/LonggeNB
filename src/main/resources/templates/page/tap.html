@@ -46,9 +46,12 @@
                     num="tap_pmUp";
                 }
 
-                if(h===17){
+                if(h===19){
                     $("#time").text("下午签退");
                     num="tap_pmDown";
+                }else
+                {
+                    $("#time").text("未到下一次打卡时间!").attr({"disabled":"disabled"});
                 }
 
 
@@ -69,7 +72,7 @@
                         num="tap_pmUp";
                     }
 
-                    if(h===17&&ret[0].tap_pmDown.length===0){
+                    if(h===19&&ret[0].tap_pmDown.length===0){
 
                         $("#time").removeAttr("disabled").text("下午签退");
                         num="tap_pmDown";
