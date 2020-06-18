@@ -24,7 +24,6 @@ public class UploadImg {
         //获取项目classes/static的地址
         String staticPath = ClassUtils.getDefaultClassLoader().getResource("static").getPath();
         String fileName = file.getOriginalFilename();  //获取文件名
-
         // 图片存储目录及图片名称
         String url_path = "img" + File.separator + fileName;
         //图片保存路径

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <base href="/">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link rel="stylesheet" href="layui/css/layui.css"  media="all">
+</head>
+<script src="layui/jquery-3.1.1.min.js"></script>
+<body>
+<button type="button" class="layui-btn" id="time"/>
+
+<script>
+
+            $(function () {
+                var num;
+            //判断是否在前面加0
+                function getNow(s) {
+                    return s < 10 ? '0' + s: s;
+                }
+                var myDate = new Date();
+
+                var year=myDate.getFullYear();        //获取当前年
+                var month=myDate.getMonth()+1;   //获取当前月
+                var date=myDate.getDate();            //获取当前日
+
+
+                var h=myDate.getHours();              //获取当前小时数(0-23)
+                var m=myDate.getMinutes();          //获取当前分钟数(0-59)
+
+
+
+               var now = year+"-"+getNow(month)+"-"+getNow(date)
+
+                if(h===7){
+                    $("#time").text("早上打卡");
+                    num="tap_amUp";
+                }
+                if(h===12){
+                    $("#time").text("早上签退");
+                    num="tap_amDown";
+                }
+                if(h===14){
+                    $("#time").text("中午打卡");
+                    num="tap_pmUp";
+                }
+
+                if(h===17){
+                    $("#time").text("下午签退");
+                    num="tap_pmDown";
+                }
+
+
+                $.post("tea/findtap", {time: now,id:$("#userid",parent.document).text()}, function (ret) {
+                            if(ret.length===0){
+                                $.post("tea/savetap", {time: now,id:$("#userid",parent.document).text(),tapname:num}, function (ret) {
+
+                                })
+                            }
+
+
+                    if(h===12&&ret[0].tap_amDown.length===0){
+                        $("#time").removeAttr("disabled").text("早上签退");
+                        num="tap_amDown";
+                    }
+                    if(h===14&&ret[0].tap_pmUp.length===0){
+                        $("#time").removeAttr("disabled").text("中午打卡");
+                        num="tap_pmUp";
+                    }
+
+                    if(h===17&&ret[0].tap_pmDown.length===0){
+
+                        $("#time").removeAttr("disabled").text("下午签退");
+                        num="tap_pmDown";
+                    }
+                    else {
+                        $("#time").text("未到下一次打卡时间!").attr({"disabled":"disabled"});
+                    }
+
+                });
+
+$("#time").click(function () {
+
+
+    $.post("tea/tap", {id:$("#userid",parent.document).text(),tapname:num}, function (ret) {
+       if(ret){
+           alert("打卡成功!")
+           $("#time").text("已完成!");
+       }else {
+           alert("打卡失败!")
+       }
+
+    })
+
+})
+
+            })
+
+        </script>
+</body>
+</html>

@@ -30,8 +30,8 @@ public class PageController {
     public String index1(){
         return "index1";
     }
-    @RequestMapping("/Person")
+    @RequestMapping("tea/totap")
     public String Person(){
-        return "page/Person";
+        return "page/tap";
     }
 }
