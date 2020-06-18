@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sjiag.Dao.fmanagerDao">
+
+    <!--
+        ///考勤
+    -->
+    <resultMap id="kaoqin" type="map">
+        <id column="tap_id" property="tapId" javaType="int"/>
+        <result column="tap_amUp" property="tapAmUp" javaType="string"/>
+        <result column="tap_pmUp" property="tapPmUp" javaType="string"/>
+        <result column="tap_amDown" property="tapAmDown" javaType="string"/>
+        <result column="tap_pmDown" property="tapPmDown" javaType="string"/>
+        <result column="tap_time" property="tapTime" javaType="date"/>
+        <result column="tea_id" property="teaId" javaType="int"/>
+        <result column="tea_name" property="teaName" javaType="string"/>
+    </resultMap>
+    <select id="queryForteacherId" parameterType="map" resultMap="kaoqin">
+        select tea_id,tea_name from tb_teacher where user_id=#{userId}
+    </select>
+    <select id="queryForTamperAll" parameterType="map" resultMap="kaoqin">
+<!-- 获取考勤记录和教师姓名-->   <!--select * from table where   date(数据库中的时间值)   = 你要比较的日期值  ;  date()函数获取日期部分,   扔掉时间部分，然后与当前日期比较即可 -->
+        select tap_id,tap_amUp,tap_amDown,tap_pmUp,tap_pmDown,tap_time,teataper.tea_id,tea_name from tb_teataper teataper join tb_teacher teacher
+            on teataper.tea_id=teacher.tea_id where tea_name in (select tea_name from tb_teacher where teacher.tea_id=#{teaId})
+            <if test="tapTime != null">
+                and date(teataper.tap_time)=#{tapTime}
+            </if>
+    </select>
+
+
+</mapper>

@@ -114,18 +114,15 @@
                     </li>
                 </shiro:hasRole>
                 <shiro:hasRole name="fmanger">
-                    <li class="layui-nav-item"><a href="">个人信息</a></li>
-                    <li class="layui-nav-item"><a href="">我的考勤</a></li>
-                    <li class="layui-nav-item"><a href="">课表查看</a></li>
-                    <li class="layui-nav-item"><a href="">发布通知</a></li>
+                    <li class="layui-nav-item"><a href="Person" target="voiceList">个人信息</a></li>
+                    <li class="layui-nav-item"><a href="teacherkaoqin.html" target="voiceList">我的考勤</a></li>
+                    <li class="layui-nav-item"><a href="" target="voiceList">课表查看</a></li>
+                    <li class="layui-nav-item"><a href="advice.html" target="voiceList">发布通知</a></li>
 
-                    <li class="layui-nav-item layui-nav-itemed">
-                        <a class="" href="javascript:;">班级管理</a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;">学生管理</a></dd>
-                            <dd><a href="javascript:;">考勤状况</a></dd>
-                        </dl>
-                    </li>
+                    <li class="layui-nav-item"><a href="classManager.html" target="voiceList">班级管理</a></li>
+                    <li class="layui-nav-item"><a href="studentManager.html" target="voiceList">学生管理</a></li>
+                    <li class="layui-nav-item"><a href="studentkaoqin.html" target="voiceList">考勤状况</a></li>
+
                 </shiro:hasRole>
 
                 <shiro:hasRole name="jmanger">
