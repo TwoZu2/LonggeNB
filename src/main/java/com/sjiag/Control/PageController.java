@@ -39,8 +39,13 @@ public class PageController {
      * 辅导员业务
      */
     //我的考勤
-    @RequestMapping("/teacherkaoqin.html")
+    @RequestMapping("/teacherkaoqin")
     public String teacherkaoqin(){
         return "page/teacherkaoqin";
     }
+    @RequestMapping("/teacherkaoqin.html")
+    public String teacherkaoqin1(){
+        return "page/teacherkaoqin";
+    }
+
 }
