@@ -27,10 +27,6 @@ public class UserController {
     @RequestMapping("login")
     public String login(String username, String password, boolean rememberMe) throws Exception {
 
-        ModelAndView modelAndView = new ModelAndView();
-
-
-
         try {
             userService.UserLogin(username,password,rememberMe);
             System.out.println("登录成功!");
